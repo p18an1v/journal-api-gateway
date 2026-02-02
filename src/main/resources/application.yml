@@ -37,8 +37,14 @@ eureka:
     service-url:
       defaultZone: https://journal-eureka-server.onrender.com/eureka
   instance:
-    hostname: ${RENDER_EXTERNAL_HOSTNAME:localhost}
-    prefer-ip-address: false
+    hostname: ${RENDER_EXTERNAL_HOSTNAME}
+    instance-id: ${spring.application.name}:${random.value}
+    non-secure-port-enabled: false
+    secure-port-enabled: true
+    secure-port: 443
+    status-page-url: https://${RENDER_EXTERNAL_HOSTNAME}/actuator/info
+    health-check-url: https://${RENDER_EXTERNAL_HOSTNAME}/actuator/health
+    home-page-url: https://${RENDER_EXTERNAL_HOSTNAME}
 
 jwt:
   secret: MySuperSecretKeyThatIsSameEverywhere
