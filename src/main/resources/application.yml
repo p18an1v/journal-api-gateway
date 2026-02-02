@@ -6,6 +6,23 @@ spring:
     name: API-GATEWAY
 
 
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: user-service-auth
+            uri: lb://USER-SERVICE
+            predicates:
+              - Path=/auth/**
+          - id: user-service-api
+            uri: lb://USER-SERVICE
+            predicates:
+              - Path=/api/users/**
+          - id: journal-service
+            uri: lb://JOURNAL-SERVICE
+            predicates:
+              - Path=/api/journals/**
+
 eureka:
   client:
     service-url:
