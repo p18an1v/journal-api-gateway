@@ -23,12 +23,22 @@ spring:
             predicates:
               - Path=/api/journals/**
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${CLIENT_ID}
+            client-secret: ${CLIENT_KEY}
+            scope: profile,email
+
 eureka:
   client:
     service-url:
       defaultZone: https://journal-eureka-server.onrender.com/eureka
-
-
+  instance:
+    hostname: ${RENDER_EXTERNAL_HOSTNAME:localhost}
+    prefer-ip-address: false
 
 jwt:
   secret: MySuperSecretKeyThatIsSameEverywhere
